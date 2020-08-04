@@ -1,35 +1,89 @@
-  
-import React, { FC } from "react";
-import '../css/Main.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { FC, useEffect, WheelEvent, useState } from "react";
+import "../css/Main.css";
 
+import Top from "./Main/Top";
+import Dots from "./Main/Dots/Dots";
 
+enum ScrollUpDown {
+  UP = 1,
+  DOWN = -1,
+}
 
-const Bam: FC = () => {
-  AOS.init();
+const Main: FC = () => {
+  const [section, setSection] = useState(0);
+  const [isScroll, setIsScroll] = useState(false);
+  const [moveHeight, setMoveHeight] = useState(0);
+  const [maxSection, setMaxSection] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+
+    const section = document.getElementsByClassName("section");
+    setMaxSection(section.length - 1);
+    setMoveHeight(section[0].clientHeight);
+
+    const cancelWheel = (event: any) => event.preventDefault();
+    document.body.addEventListener("wheel", cancelWheel, { passive: false });
+    return () => {
+      document.body.removeEventListener("wheel", cancelWheel);
+    };
+  }, []);
+
+  const waitForScroll = (isStart: boolean): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      setIsScroll(isStart);
+      resolve(true);
+    });
+  };
+
+  const doScroll = (
+    section: number,
+    moveHeight: number,
+    upDown: ScrollUpDown
+  ): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      window.scrollTo({
+        top: (section + upDown) * moveHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+      setSection(section + upDown);
+      resolve(true);
+    });
+  };
+
+  const hi = (e: WheelEvent) => {
+    const Y = e.deltaY;
+    waitForScroll(true).then((res) => {
+      if (Y > 0 && section < maxSection && !isScroll) {
+        doScroll(section, moveHeight, ScrollUpDown.UP).then((res) => {
+          if (section > maxSection) setSection(maxSection);
+        });
+      } else if (Y < 0 && section > 0 && !isScroll) {
+        doScroll(section, moveHeight, ScrollUpDown.DOWN).then((res) => {
+          if (section < 0) setSection(0);
+        });
+      }
+      setTimeout(() => setIsScroll(false), 1300);
+    });
+  };
+
   return (
-    <div>
-      <div className="wrapper">
-        <img className="wrapImg wrapper" src="/BackgroundImg.jpg" alt="" />
-        <div className="blue w100h100"></div>
-        <div className="contents w100h100 flexColumn flexCenter">
-          <div className="title" data-aos="fade-up">소 식</div>
-          <div className="exp" data-aos="fade-up">
-          멀리 떨어져 있는 사람의 사정을 알리는 말이나 글
-          </div>
-        </div>
+    <div className="wrapper" onWheelCapture={hi}>
+      <Dots currentSection={section} />
+      <Top />
+      <div className="wrapper section ">
+        <div className="contents w100h100 flexColumn flexCenter"></div>
       </div>
-      <div className="w100h100">
-        <div className="contents w100h100 flexColumn flexCenter">
-          <div className="title" data-aos="fade-up">소 식</div>
-          <div className="exp" data-aos="fade-up">
-          멀리 떨어져 있는 사람의 사정을 알리는 말이나 글
-          </div>
-        </div>
+      <div className="wrapper section popup">
+        <div className="contents w100h100 flexColumn flexCenter popup">dd</div>
+      </div>
     </div>
-  </div>
   );
 };
 
-export default Bam;
+export default Main;

@@ -1,49 +1,64 @@
-.w100h100{
-    width:100%;
-    height: 100%;
-    position: absolute;
+.w100h100 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 .flexColumn {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .flexCenter {
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper {
-    width:100%;
-    height: 100%;
-    position: absolute;
-    top:0;
-    left:0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-
-
 
 .wrapImg {
-    z-index: -1;
-    opacity: 0.5;
+  background-image: url("/BackgroundImg.jpg");
+  background-size: cover;
 }
 
-.blue {
-    z-index: 1;
-    background-color: #42A5F5;
-    opacity: 0.2;
+.halfOpacity {
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.3);
 }
-
 
 .contents {
-    z-index: 2;
+  z-index: 2;
 }
 .title {
-    font-family: 'NotoSansKR';
-    font-weight: 500;
-    font-size: 7em;
-    line-height: 1.2em;
+  font-family: "NotoSansKR";
+  font-weight: 400;
+  font-size: 7em;
+  line-height: 1.2em;
 }
 .exp {
-    font-family: 'NanumMyeongjo';
-    color: rgba(0,0,0,0.6);
+  font-family: "NanumMyeongjo";
+}
+
+.popup {
+  background-color: red;
+}
+
+@media all and (max-width: 768px) {
+  .title {
+    font-size: 5em;
+    line-height: 1.2em;
+  }
+  .wrapImg {
+    background-position: center;
+  }
+  .exp {
+    font-family: "NotoSansKR";
+    font-weight: 300;
+    font-size: 0.8em;
+  }
+  .halfOpacity {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
 }

@@ -1,0 +1,22 @@
+.dots {
+  position: fixed;
+  top: 1em;
+  width: 100%;
+  display: flex;
+  z-index: 100;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: gray;
+  border-radius: 1em;
+  margin: 0em 0.5em;
+  transition: 0.3s;
+}
+
+.active {
+  width: 15px;
+  height: 15px;
+  background-color: black;
+}
