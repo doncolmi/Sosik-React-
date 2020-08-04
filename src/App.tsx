@@ -1,11 +1,10 @@
 import React from "react";
-import Page from "./components/Page";
+
+import Main from "./components/Main";
 
 function App() {
   return (
-    <div>
-      <Page name="BAMAM" />
-    </div>
+    <Main />
   );
 }
 
