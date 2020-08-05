@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import "../../../css/Main.css";
 
 import Login from "./SignBlock/Login";
+//todo : 3번째 페이지
 
 const Middle: FC = () => {
   return (
