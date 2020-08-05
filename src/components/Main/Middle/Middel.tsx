@@ -6,13 +6,11 @@ import Login from "./SignBlock/Login";
 const Middle: FC = () => {
   return (
     <div className="wrapper section ">
-        <div className="contents w100h100 flexColumn flexCenter blueGray">
-            <div className="sign shawdow flexCenter">
-              <Login />
-              <div className="signLine"></div>
-              <div className="join signBlock">dd</div>
-            </div>
+      <div className="contents w100h100 flexColumn flexCenter blueGray">
+        <div className="sign shawdow flexCenter">
+          <Login />
         </div>
+      </div>
     </div>
   );
 };

@@ -1,22 +1,25 @@
 import React, { FC } from "react";
 import "./SignBlock.css";
 
-import Button from "../../../Util/Button/Index";
+import Kakao from "../../../Util/SocialLogin/Kakao";
 
 const Login: FC = () => {
   return (
-    <div className="login signBlock">
-        <div className="loginTitle">로그인</div>
-        <hr />
-        <div className="loginForm flexCenter">
-          <label htmlFor="id">아이디</label>
-          <input type="text" id="id" />
-          <label htmlFor="pw">비밀번호</label>
-          <input type="password" id="pw" />
-        </div>
-        <div className="loginBtn">
-          <Button />
-        </div>
+    <div className="signBlock">
+      <div className="loginTitle">로그인 및 회원가입</div>
+      <hr />
+      <div className="loginForm flexCenter">
+        <span className="newsIcon">
+          <i className="fas fa-newspaper"></i>
+        </span>
+        <p>
+          소셜 로그인 후<br />
+          서비스 이용이 가능합니다.
+        </p>
+      </div>
+      <div className="loginBtn">
+        <Kakao />
+      </div>
     </div>
   );
 };
