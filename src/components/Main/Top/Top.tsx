@@ -1,15 +1,19 @@
 import React, { FC } from "react";
-import "../css/Main.css";
+import "../../../css/Main.css";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const Bam: FC = () => {
+import Icons from './Icons/Icons';
+import Down from './Icons/Down';
+
+const Top: FC = () => {
   AOS.init();
 
   return (
-    <div className="wrapper">
+    <div className="wrapper section wrapImg">
       <div className="wrapper">
-        <img className="wrapImg w100h100" src="/BackgroundImg.jpg" alt="" />
+        <div className="halfOpacity w100h100" />
         <div className="contents w100h100 flexColumn flexCenter">
           <div
             className="title"
@@ -27,10 +31,13 @@ const Bam: FC = () => {
           >
             멀리 떨어져 있는 사람의 사정을 알리는 말이나 글
           </div>
+          <Icons />
+          <Down />
         </div>
+        
       </div>
     </div>
   );
 };
 
-export default Bam;
+export default Top;

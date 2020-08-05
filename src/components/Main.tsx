@@ -1,8 +1,9 @@
 import React, { FC, useEffect, WheelEvent, useState } from "react";
 import "../css/Main.css";
 
-import Top from "./Main/Top";
 import Dots from "./Main/Dots/Dots";
+import Top from "./Main/Top/Top";
+import Middle from "./Main/Middle/Middel";
 
 enum ScrollUpDown {
   UP = 1,
@@ -76,9 +77,7 @@ const Main: FC = () => {
     <div className="wrapper" onWheelCapture={hi}>
       <Dots currentSection={section} />
       <Top />
-      <div className="wrapper section ">
-        <div className="contents w100h100 flexColumn flexCenter"></div>
-      </div>
+      <Middle />
       <div className="wrapper section popup">
         <div className="contents w100h100 flexColumn flexCenter popup">dd</div>
       </div>
