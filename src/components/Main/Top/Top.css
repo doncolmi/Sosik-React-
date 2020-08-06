@@ -1,0 +1,27 @@
+.halfOpacity {
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.title {
+  font-family: "NotoSansKR";
+  font-weight: 400;
+  font-size: 7em;
+  line-height: 1.2em;
+}
+.exp {
+  font-family: "NotoSansKR";
+  font-weight: 200;
+}
+.login {
+    margin-top:3em;
+}
+
+@media all and (max-width: 768px) {
+  .title {
+    font-size: 5em;
+  }
+  .exp {
+    font-size: 0.9em;
+  }
+}

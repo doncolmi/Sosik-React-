@@ -3,7 +3,8 @@ import "../css/Main.css";
 
 import Dots from "./Main/Dots/Dots";
 import Top from "./Main/Top/Top";
-import Middle from "./Main/Middle/Middel";
+import Middle from "./Main/Middle/Middle";
+import Bottom from "./Main/Bottom/Bottom";
 
 enum ScrollUpDown {
   UP = 1,
@@ -78,9 +79,7 @@ const Main: FC = () => {
       <Dots currentSection={section} />
       <Top />
       <Middle />
-      <div className="wrapper section popup">
-        <div className="contents w100h100 flexColumn flexCenter popup">dd</div>
-      </div>
+      <Bottom />
     </div>
   );
 };

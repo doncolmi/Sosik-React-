@@ -14,9 +14,10 @@ const Kakao: FC = () => {
 
   return (
     <KakaoLogin
-      className="KakaoLogin"
+      
       jsKey={"aa6f3690c20a1fcf3540efb50f7448b5"}
-      buttonText="KaKao"
+      useDefaultStyle	= {true}
+      className="KakaoLogin"
       onSuccess={responseKaKao}
       onFailure={responseFail}
       getProfile={true}
