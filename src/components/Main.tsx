@@ -4,7 +4,7 @@ import "../css/Main.css";
 
 import Header from "./Main/Header/Header";
 import Float from "./Main/Float/Float";
-import NewsList from "./Main/NewsList/NewsList";
+import NewsList, { Types } from "./Main/NewsList/NewsList";
 
 const Hi1: FC = () => {
   return <div>뭐1</div>;
@@ -23,7 +23,7 @@ const Main: FC = () => {
           <div className="Contents">
           <Float /> 
             <Switch>
-              <Route exact path="/" render={() => <NewsList type="Press" />} />
+              <Route exact path="/" render={() => <NewsList type={Types.PRESS} />} />
               <Route exact path="/hi" component={Hi1} />
               <Route exact path="/byes" component={Hi2} />
             </Switch>
