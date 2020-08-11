@@ -1,0 +1,17 @@
+.Floatting{
+    width:10%;
+    position: fixed;
+    top: 20%;
+    right: 10%;
+    border-left: 2px solid lightgray;
+}
+.Floatting div{
+    padding: 0% 15% 5% 4%;
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.5);
+}
+
+.Floatting .activeMenu {
+    color: black;
+    font-weight: bold;
+}

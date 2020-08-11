@@ -57,6 +57,10 @@
   .box div {
     width: 100%;
   }
+
+  .boxTop {
+    height:40%;
+  }
   .boxTitle {
     font-size: 1.5em;
   }
@@ -68,6 +72,9 @@
     box-shadow: 0px 0px 0px 0px;
   }
 
+  .boxBottom {
+    height: 60%;
+  }
   .boxHr {
     width: 60%;
     margin-bottom: 0em;

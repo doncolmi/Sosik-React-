@@ -1,0 +1,45 @@
+    .ImgBoxMiddle {
+    display: flex;
+    height: 25%;
+  }
+  .ImgBoxMiddle span {
+      text-align: center;
+  }
+  .boxImg {
+      width: 50%;
+      height: 50%;
+      box-sizing: border-box;
+  }
+  .ImgBoxHr {
+      width: 90%;
+      margin-bottom: 0;
+  }
+  .ImgBoxBottom {
+    display: flex;
+    height: 30%;
+  }
+
+  @media all and (max-width: 768px) {
+    .ImgBoxBottom {
+        display: none;
+    }
+    .imgBoxTop {
+        width:30%;
+    }
+    .ImgBoxMiddle {
+        display: flex;
+        height: 70%;
+    }
+    .boxImg {
+        width: 30%;
+        height: 30%;
+        box-sizing: border-box;
+    }
+    .imgBox {
+        height:33.3%;
+    }
+    .ImgBoxHr {
+        margin-bottom: 1em;
+    }
+  }
+  

@@ -1,86 +1,35 @@
-import React, { FC, useEffect, WheelEvent, useState } from "react";
+import React, { FC } from "react";
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import "../css/Main.css";
 
-import Dots from "./Main/Dots/Dots";
-import Top from "./Main/Top/Top";
-import Middle from "./Main/Middle/Middle";
-import Bottom from "./Main/Bottom/Bottom";
+import Header from "./Main/Header/Header";
+import Float from "./Main/Float/Float";
+import NewsList from "./Main/NewsList/NewsList";
 
-enum ScrollUpDown {
-  UP = 1,
-  DOWN = -1,
+const Hi1: FC = () => {
+  return <div>뭐1</div>;
+}
+
+const Hi2: FC = () => {
+  return <div>뭐2</div>;
 }
 
 const Main: FC = () => {
-  const [section, setSection] = useState(0);
-  const [isScroll, setIsScroll] = useState(false);
-  const [moveHeight, setMoveHeight] = useState(0);
-  const [maxSection, setMaxSection] = useState(0);
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-
-    const section = document.getElementsByClassName("section");
-    setMaxSection(section.length - 1);
-    setMoveHeight(section[0].clientHeight);
-
-    const cancelWheel = (event: any) => event.preventDefault();
-    document.body.addEventListener("wheel", cancelWheel, { passive: false });
-    return () => {
-      document.body.removeEventListener("wheel", cancelWheel);
-    };
-  }, []);
-
-  const waitForScroll = (isStart: boolean): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      setIsScroll(isStart);
-      resolve(true);
-    });
-  };
-
-  const doScroll = (
-    section: number,
-    moveHeight: number,
-    upDown: ScrollUpDown
-  ): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      window.scrollTo({
-        top: (section + upDown) * moveHeight,
-        left: 0,
-        behavior: "smooth",
-      });
-      setSection(section + upDown);
-      resolve(true);
-    });
-  };
-
-  const hi = (e: WheelEvent) => {
-    const Y = e.deltaY;
-    waitForScroll(true).then((res) => {
-      if (Y > 0 && section < maxSection && !isScroll) {
-        doScroll(section, moveHeight, ScrollUpDown.UP).then((res) => {
-          if (section > maxSection) setSection(maxSection);
-        });
-      } else if (Y < 0 && section > 0 && !isScroll) {
-        doScroll(section, moveHeight, ScrollUpDown.DOWN).then((res) => {
-          if (section < 0) setSection(0);
-        });
-      }
-      setTimeout(() => setIsScroll(false), 1300);
-    });
-  };
 
   return (
-    <div className="wrapper" onWheelCapture={hi}>
-      <Dots currentSection={section} />
-      <Top />
-      <Middle />
-      <Bottom />
-    </div>
+    <Router>
+      <div className="MainWrapper">
+          <Header />
+          <div className="Contents">
+          <Float /> 
+            <Switch>
+              <Route exact path="/" component={NewsList} />
+              <Route exact path="/hi" component={Hi1} />
+              <Route exact path="/byes" component={Hi2} />
+            </Switch>
+          </div>
+      </div>
+    </Router>
   );
 };
 

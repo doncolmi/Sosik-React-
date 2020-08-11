@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "../../../css/Main.css";
+import "../../../css/GuestMain.css";
 import "./Top.css";
 
 import AOS from "aos";

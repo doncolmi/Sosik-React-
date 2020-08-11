@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "../../../css/Main.css";
+import "../../../css/GuestMain.css";
 import "./Middle.css";
 
 import Down from "../Top/Icons/Down";
@@ -54,7 +54,7 @@ const Middle: FC = () => {
             <Block content={press} />
           </div>
         </div>
-        <Down Message="스크롤해서 사이트 특징 보기" />
+        <Down Message="스크롤해서 개발요소 보기" />
       </div>
     </div>
   );

@@ -1,0 +1,63 @@
+.w100h100 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.flex {
+  display: flex;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+.flexCenter {
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wrapImg {
+  background-image: url("/BackgroundImg.jpg");
+  background-size: cover;
+}
+
+.contents {
+  z-index: 2;
+}
+
+.sign {
+  width: 20%;
+  height: 60%;
+  border-radius: 0.8em;
+  background-color: white;
+  display: flex;
+}
+.shawdow {
+  box-shadow: 0px 0px 10px 0px #cfd8dc;
+}
+
+
+
+@media all and (max-width: 768px) {
+  .title {
+    font-size: 5em;
+    line-height: 1.2em;
+  }
+  .wrapImg {
+    background-position: center;
+  }
+  .exp {
+    font-family: "NotoSansKR";
+    font-weight: 300;
+    font-size: 0.8em;
+  }
+  .halfOpacity {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+}
