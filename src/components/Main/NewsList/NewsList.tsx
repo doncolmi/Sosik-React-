@@ -1,32 +1,26 @@
 import React, { FC } from "react";
 import "./NewsList.css";
 
-const NewsList: FC = () => {
+import NewsItem from "./NewsItem";
+import NoNews from "./NoNews";
+
+export enum Types {
+    PRESS = "Press",
+    TOPIC = "Topic",
+    ALL = "All",
+}
+
+interface Props {
+    type: Types;
+}
+
+const NewsList: FC<Props> = ({type}: Props) => {
+
+    // todo: 뉴스 목록을 가져오라는 메소드 작성
 
   return (
     <div className="NewsList">
-        <div className="NewsItem">
-            <div className="NewsPicture">
-            </div>
-            <div className="NewsContents">
-                <span className="NewsTitle">뉴스 기사 제목입니다.</span>
-                <span className="pressTopic">조선비즈 / 정치</span>
-            </div>
-            <div className="NewsInfo">
-                <span className="date">2020년 8월 11일</span>
-            </div>
-        </div>
-        <div className="NewsItem">
-            <div className="NewsPicture">
-            </div>
-            <div className="NewsContents">
-                <span className="NewsTitle">뉴스 기사 제목입니다.</span>
-                <span className="pressTopic">조선비즈 / 정치</span>
-            </div>
-            <div className="NewsInfo">
-                <span className="date">2020년 8월 11일</span>
-            </div>
-        </div>
+        <NoNews type="언론사" />
     </div>
   );
 };

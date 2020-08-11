@@ -23,7 +23,7 @@ const Main: FC = () => {
           <div className="Contents">
           <Float /> 
             <Switch>
-              <Route exact path="/" component={NewsList} />
+              <Route exact path="/" render={() => <NewsList type="Press" />} />
               <Route exact path="/hi" component={Hi1} />
               <Route exact path="/byes" component={Hi2} />
             </Switch>
