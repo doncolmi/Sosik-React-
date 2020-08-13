@@ -29,6 +29,9 @@ interface tokenInfo {
 }
 
 const Kakao: FC = () => {
+
+  const kakaoJSKey: string = process.env["REACT_APP_KAKAO_API"]!;
+
   const createUserDto = (profile: any, response: any): UserDto => {
     return {
       userId: profile.id,
@@ -70,7 +73,7 @@ const Kakao: FC = () => {
 
   return (
     <KakaoLogin
-      jsKey={"aa6f3690c20a1fcf3540efb50f7448b5"}
+      jsKey={kakaoJSKey}
       useDefaultStyle={true}
       className="KakaoLogin"
       onSuccess={responseKaKao}

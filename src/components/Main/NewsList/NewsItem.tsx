@@ -1,7 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { News } from "./NewsList";
 import "./NewsItem.css";
 
-const NewsItem: FC = () => {
+interface Props {
+  data: News;
+}
+const NewsItem: FC<Props> = ({data}: Props) => {
+  const [fake, setFake] = useState("");
+
+  if(data.fakeNews > 10) {
+    setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
+  }
 
   return (
     <div>
@@ -9,12 +18,12 @@ const NewsItem: FC = () => {
             <div className="NewsPicture">
             </div>
             <div className="NewsContents">
-                <span className="NewsTitle">뉴스 기사 제목입니다.</span>
-                <span className="pressTopic">조선비즈 / 정치</span>
-                <span className="fakeNews">!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!</span>
+                <span className="NewsTitle">{data.title}</span>
+                <span className="pressTopic">{data.pressId} / {data.topicName}</span>
+                <span className="fakeNews">{fake}</span>
             </div>
             <div className="NewsInfo">
-                <span className="date">2020년 8월 11일</span>
+                <span className="date">{data.createdDate}</span>
             </div>
         </div>
         <hr />
