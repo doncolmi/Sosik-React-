@@ -12,6 +12,9 @@ const NewsItem: FC<Props> = ({data}: Props) => {
     setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
   }
 
+  const date = new Date(data.createdDate);
+  console.log(`${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getDate()} ${date.getHours()}:${date.getMinutes()}`);
+
   return (
     <div>
         <div className="NewsItem">

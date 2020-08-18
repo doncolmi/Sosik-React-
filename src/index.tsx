@@ -10,11 +10,11 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   
-    <React.StrictMode>
+    // <React.StrictMode>
       <CookiesProvider>
         <App />
       </CookiesProvider>
-    </React.StrictMode>
+    // </React.StrictMode>
   ,
   document.getElementById("root")
 );
