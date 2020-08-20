@@ -1,10 +1,10 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import React, { FC, useState, useEffect } from "react";
 import axios, { AxiosResponse } from 'axios';
 import "./NewsList.css";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../modules';
-import { setIsFirstPage, setIsNoNews } from '../../../modules/news';
+import { setIsFirstPage, setIsNoNews, setIsLoading, addNews, setLastNews } from '../../../modules/news';
 
 import NewsItem from "./NewsItem";
 import NoNews from "./NoNews";
@@ -35,92 +35,89 @@ interface Props {
 }
 
 const NewsList: FC<Props> = ({type}: Props) => {
-  // const target = useRef<HTMLDivElement>(null);
-
-  // let isFirst: boolean = true;
-  // let lastNews: any;
-  // let datas:any = [];
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [noNews, setNoNews] = useState(null);
 
 
-  // const getNews = () => {
-  //   return new Promise((resolve, reject) => {
-  //     isFirst = false;
-  //     setIsLoading(true);
-  //     axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news`)
-  //     .then(({data}: AxiosResponse) => {
-  //       datas = datas.concat(data);
-  //       lastNews = data[data.length - 1];
-  //       setIsLoading(false);
-  //       resolve(true);
-  //       console.log(datas);
-  //     }).catch(err => console.log(err));
-  //   })
-  // }
+  const [target, setTarget] = useState();
 
-  // const addNews = () => {
-  //   return new Promise((resolve, reject) => {
-  //     setIsLoading(true);
-  //     axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news?date=${lastNews.createdDate}`)
-  //     .then(({data}: AxiosResponse) => {
-  //       datas = datas.concat(data);
-  //       console.log(datas);
-  //       lastNews = data[data.length - 1];
-  //       setIsLoading(false);
-  //       resolve(true);
-  //     }).catch(err => console.log(err));
-  //   })
-  // }
-
-  
-  // useEffect(() => {
-  //   let observer: IntersectionObserver;
-  //   getNews().then((res) => {
-  //     if (target.current) {
-  //       observer = new IntersectionObserver(_onIntersect, { threshold: 1 });
-  //       observer.observe(target.current);
-  //     }
-  //   })
-  //   return () => observer && observer.disconnect();
-  // }, [ target ])
-
-  // const _onIntersect:IntersectionObserverCallback = ([entry]) => {
-  //   if(entry.isIntersecting) {
-  //     console.log("발견", isFirst)
-  //       if(!isFirst) {
-  //         addNews()
-  //         .then((res) => {
-  //           console.log(res);
-  //         })
-  //         .catch(err => {
-  //           console.log(err);
-  //         })
-  //       }
-  //   }
-  // };
-
-  // if(datas) {
-  //   return(
-  //     <div className="NewsList">
-  //       {datas.forEach((element: any) => {
-  //           return <NewsItem data={element} key={Math.random()}/>
-  //         })}
-  //       {datas.map((element: any) => {
-  //         return <NewsItem data={element} key={Math.random()}/>
-  //       })}
-  //       {isLoading ? <div>loading...</div> :  <div ref={target}></div>}
-  //     </div>
-  //   );
-  // }
-  const news = useSelector((state: RootState) => state.news.isFirstPage);
+  const state = useSelector((state: RootState) => state.news);
   const dispatch = useDispatch();
 
-  console.log(news);
+  const doSetIsNoNews = (bool: boolean) => {
+    dispatch(setIsNoNews(bool));
+  }
+  const doSetIsFirstPage = (bool: boolean) => {
+    dispatch(setIsFirstPage(bool));
+  }
+  const doSetIsLoading = (bool: boolean) => {
+    dispatch(setIsLoading(bool));
+  }
+  const doAddNews = (news: any) => {
+    dispatch(addNews(news));
+  }
+  const doSetLastNews = (news: any) => {
+    dispatch(setLastNews(news));
+  }
 
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+    console.log(target);
+    if (target) {
+      observer = new IntersectionObserver(onIntersect, { threshold: 0.9 });
+      observer.observe(target);
+    }
+    return () => observer && observer.disconnect();
+  }, [ target, state ]);
+
+  const onIntersect:IntersectionObserverCallback = ([entry]) => {
+    console.log(state.newsList);
+    console.log(state.lastNews);
+    if(entry.isIntersecting && !state.isLoading) {
+        if(state.isFirstPage) {
+          doSetIsFirstPage(false);
+          getNews();
+        } else if(state.lastNews && !state.isFirstPage) {
+          addNewsList();
+        }
+        
+    }
+  };
+
+  const getNews = () => {
+    axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news`)
+    .then(({data}: AxiosResponse) => {
+      doSetLastNews(data[data.length - 1]);
+      doAddNews(data);
+      doSetIsLoading(false);
+
+    })
+  }
+
+  const addNewsList = () => {
+    doSetIsLoading(true);
+    axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news?date=${state.lastNews.createdDate}`)
+      .then(({data}: AxiosResponse) => {
+      doSetLastNews(data[data.length - 1]);
+      doAddNews(data);
+      doSetIsLoading(false);
+    })
+  }
+
+  if(state.isNoNews) {
+    return(
+      <div className="NewsList">
+        {state.newsList.map((element: any) => {
+          return <NewsItem data={element} key={Math.random()}/>
+        })}
+        {state.isLoading ? <div className="loadingBar"><img src="/loadingBar.svg" alt="loadingBar"/></div> : <div ref={ setTarget } className="bammm"></div>}
+      </div>
+    );
+  }
   return (
     <div><NoNews type={type} /></div>
   )
+  
+  
 };
 
 export default NewsList;

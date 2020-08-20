@@ -16,7 +16,7 @@ type CounterAction =
   | ReturnType<typeof increaseBy>;
 
 type CounterState = {
-count: number;
+  count: number;
 }
 
 const initialState: CounterState = {

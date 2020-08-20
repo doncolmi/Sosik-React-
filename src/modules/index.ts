@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 import news from './news';
+import counter from './counter';
 
 const rootReducer = combineReducers({
+  counter,
   news
 });
 
