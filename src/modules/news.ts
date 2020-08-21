@@ -3,19 +3,22 @@ const SETISFIRSTPAGE = 'news/SETISFIRSTPAGE' as const;
 const SETISLOADING = 'news/SETISLOADING' as const;
 const SETLASTNEWS = 'news/SETLASTNEWS' as const;
 const ADDNEWS = 'news/ADDNEWS' as const;
+const RESETNEWSSTATE = 'news/RESETNEWSSTATE' as const;
 
 export const setIsFirstPage = (bool: boolean) => ({ type: SETISFIRSTPAGE, payload: bool });
 export const setIsNoNews = (bool: boolean) => ({ type: SETISNONEWS, payload: bool });
 export const setIsLoading = (bool: boolean) => ({ type: SETISLOADING, payload: bool });
 export const setLastNews = (news: any) => ({ type: SETLASTNEWS, payload: news });
 export const addNews = (news: [any]) => ({ type: ADDNEWS, payload: news });
+export const resetNewsState = () => ({ type: RESETNEWSSTATE });
 
 type NewsAction =
     | ReturnType<typeof setIsFirstPage>
     | ReturnType<typeof setIsNoNews>
     | ReturnType<typeof setIsLoading>
     | ReturnType<typeof setLastNews>
-    | ReturnType<typeof addNews>;
+    | ReturnType<typeof addNews>
+    | ReturnType<typeof resetNewsState>;
 
 type NewsState = {
     isFirstPage: boolean,
@@ -27,7 +30,7 @@ type NewsState = {
 
 const initialState: NewsState = {
     isFirstPage: true,
-    isNoNews: true,
+    isNoNews: false,
     isLoading: false,
     lastNews: null,
     newsList: [],
@@ -79,6 +82,14 @@ function news(state: NewsState = initialState, action: NewsAction): NewsState {
                 isLoading : state.isLoading,
                 lastNews : state.lastNews,
                 newsList : state.newsList,
+            };
+        case RESETNEWSSTATE:
+            return {
+                isFirstPage: true,
+                isNoNews: true,
+                isLoading: false,
+                lastNews: null,
+                newsList: [],
             };
         default:
             return state;

@@ -1,6 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
+import {Properties} from 'csstype';
 import { News } from "./NewsList";
 import "./NewsItem.css";
+
+import { load } from "cheerio";
 
 interface Props {
   data: News;
@@ -12,6 +15,17 @@ const NewsItem: FC<Props> = (({data}: Props) => {
 
   if(fakeNews > 10) {
     setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
+  }
+
+  function setImage(contents: string): Properties  {
+    const $ = load(contents);
+    const img: string = $("img").attr("src") || "/noImg.png";
+    return {
+      backgroundImage: `url(${img})`,
+      backgroundSize: `cover`,
+      backgroundRepeat: `no-repeat`,
+      backgroundPosition: `center center`,
+    }
   }
 
   function simpleDate(createdDate: string): any {
@@ -43,8 +57,8 @@ const NewsItem: FC<Props> = (({data}: Props) => {
 
   return (
     <div>
-        <div className="NewsItem">
-            <div className="NewsPicture">
+        <div className="NewsItem" >
+            <div className="NewsPicture" style={setImage(data.contents)}>
             </div>
             <div className="NewsContents">
                 <span className="NewsTitle">{title}</span>
@@ -52,7 +66,8 @@ const NewsItem: FC<Props> = (({data}: Props) => {
                 <span className="fakeNews">{fake}</span>
             </div>
             <div className="NewsInfo">
-                <span className="date">{simpleDate(createdDate)}</span>
+              <div><span className="date">{simpleDate(createdDate)}</span></div>
+              <div className="saveNews"><span onClick={() => console.log("하이")}><i className="fas fa-thumbtack"></i></span></div>
             </div>
         </div>
         <hr />

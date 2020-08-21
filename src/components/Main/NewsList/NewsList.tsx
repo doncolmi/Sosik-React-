@@ -4,7 +4,7 @@ import "./NewsList.css";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../modules';
-import { setIsFirstPage, setIsNoNews, setIsLoading, addNews, setLastNews } from '../../../modules/news';
+import { setIsFirstPage, setIsNoNews, setIsLoading, addNews, setLastNews, resetNewsState } from '../../../modules/news';
 
 import NewsItem from "./NewsItem";
 import NoNews from "./NoNews";
@@ -38,6 +38,7 @@ const NewsList: FC<Props> = ({type}: Props) => {
 
 
   const [target, setTarget] = useState();
+  const [currentType, setCurrentType] = useState(type);
 
   const state = useSelector((state: RootState) => state.news);
   const dispatch = useDispatch();
@@ -57,21 +58,23 @@ const NewsList: FC<Props> = ({type}: Props) => {
   const doSetLastNews = (news: any) => {
     dispatch(setLastNews(news));
   }
+  const doResetNewsState = () => {
+    dispatch(resetNewsState());
+  }
 
 
   useEffect(() => {
     let observer: IntersectionObserver;
-    console.log(target);
     if (target) {
       observer = new IntersectionObserver(onIntersect, { threshold: 0.9 });
       observer.observe(target);
     }
-    return () => observer && observer.disconnect();
+    return () => {
+      observer && observer.disconnect();
+    }
   }, [ target, state ]);
 
   const onIntersect:IntersectionObserverCallback = ([entry]) => {
-    console.log(state.newsList);
-    console.log(state.lastNews);
     if(entry.isIntersecting && !state.isLoading) {
         if(state.isFirstPage) {
           doSetIsFirstPage(false);
@@ -86,9 +89,16 @@ const NewsList: FC<Props> = ({type}: Props) => {
   const getNews = () => {
     axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news`)
     .then(({data}: AxiosResponse) => {
-      doSetLastNews(data[data.length - 1]);
-      doAddNews(data);
-      doSetIsLoading(false);
+      console.log("adsad", data);
+      if(data.length > 0) {
+        doSetIsNoNews(true);
+        doSetLastNews(data[data.length - 1]);
+        doAddNews(data);
+        doSetIsLoading(false);
+      } else {
+        console.log(state.isFirstPage, "...");
+      }
+      
 
     })
   }
@@ -103,19 +113,26 @@ const NewsList: FC<Props> = ({type}: Props) => {
     })
   }
 
-  if(state.isNoNews) {
+  if(state.isFirstPage){
+    return (
+        <div ref={ setTarget } className="bammm"></div>
+    )
+  } else if(state.isNoNews) {
     return(
       <div className="NewsList">
         {state.newsList.map((element: any) => {
           return <NewsItem data={element} key={Math.random()}/>
         })}
-        {state.isLoading ? <div className="loadingBar"><img src="/loadingBar.svg" alt="loadingBar"/></div> : <div ref={ setTarget } className="bammm"></div>}
+        {state.isLoading ? <div className="loadingBar"><img src="/loadingBar.gif" alt="loadingBar"/></div> : <div ref={ setTarget } className="bammm"></div>}
       </div>
     );
   }
-  return (
-    <div><NoNews type={type} /></div>
-  )
+  if(state.newsList.length < 1) {
+    return (
+      <div><NoNews type={type} /></div>
+    )
+  } 
+  return (<></>);
   
   
 };
