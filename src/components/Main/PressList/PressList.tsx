@@ -1,54 +1,45 @@
-import React, { FC, useState, useEffect } from "react";
-import axios, { AxiosResponse } from 'axios';
+import React, { FC } from "react";
+import { useGetRequest, usePostRequest } from "../../../hooks/useRequest";
 import "./PressList.css";
 
-const NewsList: FC = () => {
-    // todo: 만들어야해
-    const myPressList = useState(getMyPressList());
-  useEffect(() => {
-    getMyPressList();
-    getPressList();
-  });
+import PressListItem from "./PressListItem";
 
-  const getMyPressList = () => {
-    axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news`)
-    .then(({data}: AxiosResponse) => {
-        
-    })
+const PressList: FC = () => {
+  // todo: 만들어야해
+  const [response, loading, error] = useGetRequest(
+    `${process.env["REACT_APP_BACKEND_SERVER"]}/press`
+  );
+
+  if (loading) return <div>loading...</div>;
+  if (error) return <div>error!</div>;
+
+  if (!response) return null;
+
+  const pressList: any = response.data.pressList;
+  const pressFollowList: any = response.data.pressFollowList;
+
+  function getIsFollow(element: any): boolean {
+    return pressFollowList.includes(element.pressId);
   }
 
-  const addNewsList = () => {
-    doSetIsLoading(true);
-    axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news?date=${state.lastNews.createdDate}`)
-      .then(({data}: AxiosResponse) => {
-      doSetLastNews(data[data.length - 1]);
-      doAddNews(data);
-      doSetIsLoading(false);
-    })
-  }
+  let number = 0;
 
-  if(state.isFirstPage){
-    return (
-        <div ref={ setTarget } className="bammm"></div>
-    )
-  } else if(state.isNoNews) {
-    return(
-      <div className="NewsList">
-        {state.newsList.map((element: any) => {
-          return <NewsItem data={element} key={Math.random()}/>
-        })}
-        {state.isLoading ? <div className="loadingBar"><img src="/loadingBar.gif" alt="loadingBar"/></div> : <div ref={ setTarget } className="bammm"></div>}
-      </div>
-    );
-  }
-  if(state.newsList.length < 1) {
-    return (
-      <div><NoNews type={type} /></div>
-    )
-  } 
-  return (<></>);
-  
-  
+  return (
+    <div className="PressListWrapper">
+      <PressListItem isFollow={false} />
+      {pressList.map((element: any) => {
+        number++;
+        return (
+          <PressListItem
+            data={element}
+            num={number}
+            key={Math.random()}
+            isFollow={getIsFollow(element)}
+          />
+        );
+      })}
+    </div>
+  );
 };
 
-export default NewsList;
+export default PressList;
