@@ -27,6 +27,8 @@
 .PressName span {
   font-size: 2em;
   font-weight: 500;
+  color: black;
+  cursor: pointer;
 }
 
 .PressFollow {

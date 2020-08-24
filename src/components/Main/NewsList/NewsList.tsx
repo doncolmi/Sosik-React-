@@ -89,17 +89,12 @@ const NewsList: FC<Props> = ({type}: Props) => {
   const getNews = () => {
     axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news`)
     .then(({data}: AxiosResponse) => {
-      console.log("adsad", data);
       if(data.length > 0) {
         doSetIsNoNews(true);
         doSetLastNews(data[data.length - 1]);
         doAddNews(data);
         doSetIsLoading(false);
-      } else {
-        console.log(state.isFirstPage, "...");
       }
-      
-
     })
   }
 

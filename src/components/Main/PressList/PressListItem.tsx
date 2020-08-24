@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import "./PressListItem.css";
 
 import PressFollow from "./PressFollow";
+import PressName from "./PressName";
+import PressNum from "./PressNum";
 
 interface Props {
   data?: any;
@@ -29,12 +31,8 @@ const PressListItem: FC<Props> = ({ data, num, isFollow }: Props) => {
 
   return (
     <div className="PressListItem">
-      <div className="PressListNumber NumberLine">
-        <span>{num}</span>
-      </div>
-      <div className="PressName">
-        <span>{data.pressName}</span>
-      </div>
+      <PressNum num={num!} />
+      <PressName name={data.pressName} />
       <PressFollow isFollow={isFollow} />
     </div>
   );

@@ -6,6 +6,7 @@ import Header from "./Main/Header/Header";
 import Float from "./Main/Float/Float";
 import NewsList, { Types } from "./Main/NewsList/NewsList";
 import PressList from "./Main/PressList/PressList";
+import Press from "./Main/PressList/Press/Press";
 
 const Hi2: FC = () => {
   return <div>뭐2</div>;
@@ -25,11 +26,11 @@ const Main: FC = () => {
               render={() => <NewsList type={Types.PRESS} />}
             />
             <Route
-              exact
               path="/all"
               render={() => <NewsList type={Types.ALL} />}
             />
-            <Route exact path="/press" render={() => <PressList />} />
+            <Route exact path="/press" component={PressList} />
+            <Route exact path="/press/:name" component={Press} />
             <Route exact path="/byes" component={Hi2} />
           </Switch>
         </div>
