@@ -33,7 +33,7 @@ const PressListItem: FC<Props> = ({ data, num, isFollow }: Props) => {
     <div className="PressListItem">
       <PressNum num={num!} />
       <PressName name={data.pressName} />
-      <PressFollow isFollow={isFollow} />
+      <PressFollow isFollow={isFollow} pressId={data.pressId} />
     </div>
   );
 };

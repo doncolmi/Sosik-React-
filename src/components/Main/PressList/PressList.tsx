@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useGetRequest, usePostRequest } from "../../../hooks/useRequest";
+import { useGetRequest } from "../../../hooks/useRequest";
 import "./PressList.css";
 
 import PressListItem from "./PressListItem";
