@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
-import {Properties} from 'csstype';
+import React, { FC, useState } from "react";
+import { Properties } from "csstype";
 import { News } from "./NewsList";
 import "./NewsItem.css";
 
@@ -8,16 +8,16 @@ import { load } from "cheerio";
 interface Props {
   data: News;
 }
-const NewsItem: FC<Props> = (({data}: Props) => {
+const NewsItem: FC<Props> = ({ data }: Props) => {
   const [fake, setFake] = useState("");
 
-  const {fakeNews, title, topicName, pressName, createdDate} = data;
+  const { fakeNews, title, topicName, pressName, createdDate } = data;
 
-  if(fakeNews > 10) {
+  if (fakeNews > 10) {
     setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
   }
 
-  function setImage(contents: string): Properties  {
+  function setImage(contents: string): Properties {
     const $ = load(contents);
     const img: string = $("img").attr("src") || "/noImg.png";
     return {
@@ -25,7 +25,7 @@ const NewsItem: FC<Props> = (({data}: Props) => {
       backgroundSize: `cover`,
       backgroundRepeat: `no-repeat`,
       backgroundPosition: `center center`,
-    }
+    };
   }
 
   function simpleDate(createdDate: string): any {
@@ -52,27 +52,33 @@ const NewsItem: FC<Props> = (({data}: Props) => {
         (Math.floor(day_diff / 360) === 0 ? 1 : Math.floor(day_diff / 360)) +
           " 년 전")
     );
-
   }
 
   return (
     <div>
-        <div className="NewsItem" >
-            <div className="NewsPicture" style={setImage(data.contents)}>
-            </div>
-            <div className="NewsContents">
-                <span className="NewsTitle">{title}</span>
-                <span className="pressTopic">{pressName} / {topicName}</span>
-                <span className="fakeNews">{fake}</span>
-            </div>
-            <div className="NewsInfo">
-              <div><span className="date">{simpleDate(createdDate)}</span></div>
-              <div className="saveNews"><span onClick={() => console.log("하이")}><i className="fas fa-thumbtack"></i></span></div>
-            </div>
+      <div className="NewsItem">
+        <div className="NewsPicture" style={setImage(data.contents)}></div>
+        <div className="NewsContents">
+          <span className="NewsTitle">{title}</span>
+          <span className="pressTopic">
+            {pressName} / {topicName}
+          </span>
+          <span className="fakeNews">{fake}</span>
         </div>
-        <hr />
+        <div className="NewsInfo">
+          <div>
+            <span className="date">{simpleDate(createdDate)}</span>
+          </div>
+          <div className="saveNews">
+            <span onClick={() => console.log("하이")}>
+              <i className="fas fa-thumbtack"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <hr />
     </div>
   );
-});
+};
 
 export default NewsItem;
