@@ -46,3 +46,19 @@ export function usePostRequest(url: string, data: Object) {
   }, [url, data]);
   return [response, loading, error];
 }
+
+export function useFirstNews(url: string) {
+  const [response, setResponse] = useState<any>(null);
+
+  const doRequest = async (url: string) => {
+    const { data } = await axios.get(url);
+    console.log(data);
+    await setResponse(data);
+  };
+
+  useEffect(() => {
+    doRequest(url);
+  }, [url]);
+
+  return response;
+}

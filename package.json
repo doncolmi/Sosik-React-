@@ -27,6 +27,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-toast-notifications": "^2.4.0",
     "redux": "^4.0.5",
     "sweetalert2": "^9.17.1",
     "typescript": "^3.7.5"
@@ -54,7 +55,8 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/cheerio": "^0.22.21"
+    "@types/cheerio": "^0.22.21",
+    "@types/react-toast-notifications": "^2.4.0"
   },
   "proxy": "http://localhost:3001"
 }

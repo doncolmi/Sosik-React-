@@ -1,2 +1,17 @@
-/* BottomFloat.tsx로 아래에 fixed 모달뜨게 하기
- */
+.BottomFloat {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  opacity: 1;
+  animation: fade 2s linear;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

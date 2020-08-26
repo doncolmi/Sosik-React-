@@ -1,16 +1,20 @@
 import React, { FC, useState, useEffect } from "react";
 import "./PressListItem.css";
+import { useToasts } from "react-toast-notifications";
 
 import axios from "axios";
-import Swal from "sweetalert2";
 
 interface Props {
   isFollow: boolean;
   pressId: string;
+  name: string;
 }
 
-const PressFollow: FC<Props> = ({ isFollow, pressId }: Props) => {
+const PressFollow: FC<Props> = ({ isFollow, pressId, name }: Props) => {
   const [follow, setFollow] = useState<boolean>(isFollow);
+  const { addToast } = useToasts();
+  const followText = `${name}를 팔로우 했습니다!`;
+  const unFollowText = `${name}를 언팔로우 했습니다!`;
 
   useEffect(() => {}, [follow]);
 
@@ -22,6 +26,10 @@ const PressFollow: FC<Props> = ({ isFollow, pressId }: Props) => {
       );
       if (response) {
         await setFollow(true);
+        addToast(followText, {
+          appearance: "success",
+          autoDismiss: true,
+        });
       } else setFollow(false);
     } catch (e) {
       throw new Error(e);
@@ -35,6 +43,10 @@ const PressFollow: FC<Props> = ({ isFollow, pressId }: Props) => {
     );
     if (response) {
       await setFollow(false);
+      addToast(unFollowText, {
+        appearance: "error",
+        autoDismiss: true,
+      });
     } else setFollow(true);
   }
 

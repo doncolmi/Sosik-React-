@@ -1,18 +1,14 @@
 import React, { FC, useState, useEffect } from "react";
-import axios, { AxiosResponse } from 'axios';
+import axios from "axios";
 import "./NewsList.css";
-
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../modules';
-import { setIsFirstPage, setIsNoNews, setIsLoading, addNews, setLastNews, resetNewsState } from '../../../modules/news';
 
 import NewsItem from "./NewsItem";
 import NoNews from "./NoNews";
 
 export enum Types {
-    PRESS = "언론사",
-    TOPIC = "주제",
-    ALL = "All",
+  PRESS = "언론사",
+  TOPIC = "주제",
+  ALL = "All",
 }
 
 export interface News {
@@ -31,105 +27,120 @@ export interface News {
 }
 
 interface Props {
-    type: Types;
+  type: Types;
 }
 
-const NewsList: FC<Props> = ({type}: Props) => {
+const NewsList: FC<Props> = ({ type }: Props) => {
+  const getUrl = (type: Types): string => {
+    if (type === Types.PRESS) return "news/press";
+    if (type === Types.TOPIC) return "news/topic";
+    return "news";
+  };
 
+  const reset = async () => {
+    await setUrl(getUrl(type));
+    await setNewsList(null);
+    await setLastNews(undefined);
+    await setIsEnd(false);
+    await setIsFirstPage(true);
+    await setIsLoading(false);
+  };
+
+  const [url, setUrl] = useState<string>(getUrl(type));
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFirstPage, setIsFirstPage] = useState(true);
+  const [lastNews, setLastNews] = useState<News>();
+  const [newsList, setNewsList] = useState<any>();
+  const [isEnd, setIsEnd] = useState<any>(false);
 
   const [target, setTarget] = useState();
-  const [currentType, setCurrentType] = useState(type);
-
-  const state = useSelector((state: RootState) => state.news);
-  const dispatch = useDispatch();
-
-  const doSetIsNoNews = (bool: boolean) => {
-    dispatch(setIsNoNews(bool));
-  }
-  const doSetIsFirstPage = (bool: boolean) => {
-    dispatch(setIsFirstPage(bool));
-  }
-  const doSetIsLoading = (bool: boolean) => {
-    dispatch(setIsLoading(bool));
-  }
-  const doAddNews = (news: any) => {
-    dispatch(addNews(news));
-  }
-  const doSetLastNews = (news: any) => {
-    dispatch(setLastNews(news));
-  }
-  const doResetNewsState = () => {
-    dispatch(resetNewsState());
-  }
-
 
   useEffect(() => {
+    if (url !== getUrl(type)) reset();
     let observer: IntersectionObserver;
-    if (target) {
+    if (target && !isEnd) {
       observer = new IntersectionObserver(onIntersect, { threshold: 0.9 });
       observer.observe(target);
     }
     return () => {
       observer && observer.disconnect();
-    }
-  }, [ target, state ]);
+    };
+  }, [target, type]);
 
-  const onIntersect:IntersectionObserverCallback = ([entry]) => {
-    if(entry.isIntersecting && !state.isLoading) {
-        if(state.isFirstPage) {
-          doSetIsFirstPage(false);
-          getNews();
-        } else if(state.lastNews && !state.isFirstPage) {
-          addNewsList();
-        }
-        
+  const onIntersect: IntersectionObserverCallback = async ([entry]) => {
+    if (entry.isIntersecting) {
+      if (isFirstPage && !isEnd) {
+        await setIsFirstPage(false);
+        await getNews();
+      } else if (!isFirstPage) {
+        await addNewsList();
+      }
     }
   };
 
-  const getNews = () => {
-    axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news`)
-    .then(({data}: AxiosResponse) => {
-      if(data.length > 0) {
-        doSetIsNoNews(true);
-        doSetLastNews(data[data.length - 1]);
-        doAddNews(data);
-        doSetIsLoading(false);
+  const getNews = async () => {
+    await setIsLoading(true);
+    const { data } = await axios.get(
+      `${process.env["REACT_APP_BACKEND_SERVER"]}/${url}`
+    );
+    if (data.length > 9) {
+      await setLastNews(data[data.length - 1]);
+      await setNewsList(data);
+      await setIsLoading(false);
+    } else if (data.length > 0 && data.length < 10) {
+      await setIsEnd(true);
+      await setNewsList(data);
+      await setIsLoading(false);
+    }
+  };
+
+  const addNewsList = async () => {
+    await setIsLoading(true);
+    if (lastNews) {
+      const { data } = await axios.get(
+        `${process.env["REACT_APP_BACKEND_SERVER"]}/${url}?date=${
+          lastNews!.createdDate
+        }`
+      );
+      if (data.length > 9) {
+        await setLastNews(data[data.length - 1]);
+        await setNewsList(newsList.concat(data));
+        await setIsLoading(false);
+      } else if (data.length > 0 && data.length < 10) {
+        await setIsEnd(true);
+        await setNewsList(newsList.concat(data));
+        await setIsLoading(false);
       }
-    })
-  }
+    }
+  };
 
-  const addNewsList = () => {
-    doSetIsLoading(true);
-    axios.get(`${process.env["REACT_APP_BACKEND_SERVER"]}/news?date=${state.lastNews.createdDate}`)
-      .then(({data}: AxiosResponse) => {
-      doSetLastNews(data[data.length - 1]);
-      doAddNews(data);
-      doSetIsLoading(false);
-    })
-  }
-
-  if(state.isFirstPage){
+  if (isFirstPage) {
+    return <div ref={setTarget} className="bammm"></div>;
+  } else if (newsList) {
     return (
-        <div ref={ setTarget } className="bammm"></div>
-    )
-  } else if(state.isNoNews) {
-    return(
       <div className="NewsList">
-        {state.newsList.map((element: any) => {
-          return <NewsItem data={element} key={Math.random()}/>
+        {newsList.map((element: any) => {
+          return <NewsItem data={element} key={Math.random()} />;
         })}
-        {state.isLoading ? <div className="loadingBar"><img src="/loadingBar.gif" alt="loadingBar"/></div> : <div ref={ setTarget } className="bammm"></div>}
+        {isLoading ? (
+          <div className="loadingBar">
+            <img src="/loadingBar.gif" alt="loadingBar" />
+          </div>
+        ) : (
+          <div ref={setTarget} className="bammm"></div>
+        )}
+        {isEnd && <div> 마지막 페이지 입니다. </div>}
       </div>
     );
   }
-  if(state.newsList.length < 1) {
+  if (!newsList) {
     return (
-      <div><NoNews type={type} /></div>
-    )
-  } 
-  return (<></>);
-  
-  
+      <div>
+        <NoNews type={type} />
+      </div>
+    );
+  }
+  return <></>;
 };
 
 export default NewsList;

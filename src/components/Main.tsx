@@ -25,10 +25,7 @@ const Main: FC = () => {
               path="/"
               render={() => <NewsList type={Types.PRESS} />}
             />
-            <Route
-              path="/all"
-              render={() => <NewsList type={Types.ALL} />}
-            />
+            <Route path="/all" render={() => <NewsList type={Types.ALL} />} />
             <Route exact path="/press" component={PressList} />
             <Route exact path="/press/:name" component={Press} />
             <Route exact path="/byes" component={Hi2} />

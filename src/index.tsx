@@ -3,25 +3,26 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import { CookiesProvider } from 'react-cookie';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './modules';
+import { CookiesProvider } from "react-cookie";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./modules";
+import { ToastProvider } from "react-toast-notifications";
 
 import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(rootReducer);
 
 ReactDOM.render(
-  
-    // <React.StrictMode>
-    <Provider store={store}>
-      <CookiesProvider>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <CookiesProvider>
+      <ToastProvider>
         <App />
-      </CookiesProvider>
-    </Provider>
-    // </React.StrictMode>
-  ,
+      </ToastProvider>
+    </CookiesProvider>
+  </Provider>,
+  // </React.StrictMode>
   document.getElementById("root")
 );
 
