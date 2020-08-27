@@ -9,6 +9,8 @@ export enum Types {
   PRESS = "언론사",
   TOPIC = "주제",
   ALL = "All",
+  ONLYPRESS = "해당 언론사",
+  ONLYTOPIC = "해당 주제",
 }
 
 export interface News {
@@ -28,12 +30,15 @@ export interface News {
 
 interface Props {
   type: Types;
+  name?: string;
 }
 
-const NewsList: FC<Props> = ({ type }: Props) => {
+const NewsList: FC<Props> = ({ type, name }: Props) => {
   const getUrl = (type: Types): string => {
     if (type === Types.PRESS) return "news/press";
-    if (type === Types.TOPIC) return "news/topic";
+    else if (type === Types.TOPIC) return "news/topic";
+    else if (type === Types.ONLYPRESS) return `news/press/${name}`;
+    else if (type === Types.ONLYTOPIC) return `news/topic/${name}`;
     return "news";
   };
 
@@ -43,15 +48,17 @@ const NewsList: FC<Props> = ({ type }: Props) => {
     await setLastNews(undefined);
     await setIsEnd(false);
     await setIsFirstPage(true);
-    await setIsLoading(false);
+    await setIsLoading(true);
+    await setNoNews(false);
   };
 
   const [url, setUrl] = useState<string>(getUrl(type));
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isFirstPage, setIsFirstPage] = useState(true);
   const [lastNews, setLastNews] = useState<News>();
   const [newsList, setNewsList] = useState<any>();
   const [isEnd, setIsEnd] = useState<any>(false);
+  const [noNews, setNoNews] = useState(false);
 
   const [target, setTarget] = useState();
 
@@ -65,7 +72,7 @@ const NewsList: FC<Props> = ({ type }: Props) => {
     return () => {
       observer && observer.disconnect();
     };
-  }, [target, type]);
+  }, [target, type, noNews]);
 
   const onIntersect: IntersectionObserverCallback = async ([entry]) => {
     if (entry.isIntersecting) {
@@ -80,17 +87,23 @@ const NewsList: FC<Props> = ({ type }: Props) => {
 
   const getNews = async () => {
     await setIsLoading(true);
-    const { data } = await axios.get(
-      `${process.env["REACT_APP_BACKEND_SERVER"]}/${url}`
-    );
-    if (data.length > 9) {
-      await setLastNews(data[data.length - 1]);
-      await setNewsList(data);
-      await setIsLoading(false);
-    } else if (data.length > 0 && data.length < 10) {
+    try {
+      const { data } = await axios.get(
+        `${process.env["REACT_APP_BACKEND_SERVER"]}/${url}`
+      );
+      if (data.length > 9) {
+        await setLastNews(data[data.length - 1]);
+        await setNewsList(data);
+        await setIsLoading(false);
+      } else if (data.length > 0 && data.length < 10) {
+        await setIsEnd(true);
+        await setNewsList(data);
+        await setIsLoading(false);
+      }
+    } catch (e) {
       await setIsEnd(true);
-      await setNewsList(data);
       await setIsLoading(false);
+      await setNoNews(true);
     }
   };
 
@@ -114,8 +127,13 @@ const NewsList: FC<Props> = ({ type }: Props) => {
     }
   };
 
-  if (isFirstPage) {
-    return <div ref={setTarget} className="bammm"></div>;
+  if (isLoading && isFirstPage) {
+    return (
+      <div>
+        <img src="/loadingBar.gif" alt="Hello" />
+        <div ref={setTarget} className="bammm"></div>;
+      </div>
+    );
   } else if (newsList) {
     return (
       <div className="NewsList">
@@ -133,14 +151,11 @@ const NewsList: FC<Props> = ({ type }: Props) => {
       </div>
     );
   }
-  if (!newsList) {
-    return (
-      <div>
-        <NoNews type={type} />
-      </div>
-    );
-  }
-  return <></>;
+  return (
+    <>
+      <NoNews type={type} isShow={noNews} />;
+    </>
+  );
 };
 
 export default NewsList;

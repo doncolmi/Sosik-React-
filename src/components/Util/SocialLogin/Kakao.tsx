@@ -29,7 +29,6 @@ interface tokenInfo {
 }
 
 const Kakao: FC = () => {
-
   const kakaoJSKey: string = process.env["REACT_APP_KAKAO_API"]!;
 
   const createUserDto = (profile: any, response: any): UserDto => {
@@ -57,14 +56,16 @@ const Kakao: FC = () => {
     });
   };
 
-  const responseKaKao = ({ profile, response }: kakaoObject) => {
+  const responseKaKao = async ({ profile, response }: kakaoObject) => {
     const userDto: UserDto = createUserDto(profile, response);
-    Axios.post("http://localhost:3001/auth/login", userDto, {
-      withCredentials: true,
-    }).then(({ data }) => {
-      const { access_token }: tokenInfo = response;
-      data ? setAxiosHeader(access_token) : welcomeMessage(access_token);
-    });
+    const { data } = await Axios.post(
+      "http://localhost:3001/auth/login",
+      userDto,
+      { withCredentials: true }
+    );
+    const { access_token }: tokenInfo = response;
+    if (data) await setAxiosHeader(access_token);
+    else await welcomeMessage(access_token);
   };
 
   const responseFail = (err: any) => {

@@ -1,0 +1,64 @@
+.PressComponent {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  text-align: center;
+  font-family: "NotoSansKR";
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+  border-bottom: 2px solid lightgray;
+}
+.pTop {
+  display: flex;
+  flex-direction: column;
+  line-height: 2.5em;
+}
+.pSmall {
+  font-weight: 300;
+  color: gray;
+}
+.pName {
+  font-weight: 500;
+  font-size: 4em;
+}
+.pInfo {
+  width: 100%;
+  margin-top: 3em;
+  display: flex;
+}
+.pInfo .pItem {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pItem span {
+  font-size: 4em;
+}
+.napkin {
+  width: 10%;
+  height: 0.5em;
+  background-color: gray;
+}
+.pData {
+  font-size: 3em;
+  font-weight: 500;
+}
+.pDescription {
+  font-size: 0.9em;
+  font-weight: 200;
+  color: gray;
+}
+.pFollow {
+  display: flex;
+}
+.pFollow span {
+  margin-right: auto;
+}
+
+.PressComponentWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
