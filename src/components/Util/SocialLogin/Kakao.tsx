@@ -42,8 +42,9 @@ const Kakao: FC = () => {
     };
   };
 
-  const setAxiosHeader = (accessToken: string): void => {
+  const setAxiosHeader = async (accessToken: string) => {
     Axios.defaults.headers.common["Authorization"] = `${accessToken}`;
+    window.location.reload();
   };
 
   const welcomeMessage = (access_token: string): void => {
