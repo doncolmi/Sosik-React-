@@ -5,7 +5,6 @@ import "./PressList.css";
 import PressListItem from "./PressListItem";
 
 const PressList: FC = () => {
-  // todo: 만들어야해
   const [response, loading, error] = useGetRequest(
     `${process.env["REACT_APP_BACKEND_SERVER"]}/press`
   );

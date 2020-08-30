@@ -1,12 +1,11 @@
 import React, { SFC } from "react";
 import "./Press.css";
 import { RouteComponentProps } from "react-router";
-import PressFollow from "../PressFollow";
 import { useGetRequest } from "../../../../hooks/useRequest";
 
 import NewsList, { Types } from "../../NewsList/NewsList";
+import PressTop from "./PressTop";
 import PressItem from "./PressItem";
-import Axios from "axios";
 
 interface MatchParams {
   name: string;
@@ -25,29 +24,10 @@ const Press: SFC<RouteComponentProps<MatchParams>> = ({ match }) => {
   if (!response) return null;
   const { pressId, followCnt, newsCnt, recentTopic } = response.data;
 
-  async function getFollowData(name: string) {
-    const { data } = await Axios.get(
-      `${process.env["REACT_APP_BACKEND_SERVER"]}/press/${name}/follow`
-    );
-    return data;
-  }
-
-  function getIsFollow(name: string): boolean {
-    return getFollowData(name) ? true : false;
-  }
-
   return (
     <div className="PressComponentWrapper">
       <div className="PressComponent">
-        <div className="pTop">
-          <PressFollow
-            isFollow={getIsFollow(name)}
-            pressId={pressId}
-            name={name}
-          />
-          <div className="pSmall">언론사</div>
-          <div className="pName">{name}</div>
-        </div>
+        <PressTop name={name} pId={pressId} />
         <div className="pInfo">
           <PressItem
             icon="fas fa-thumbs-up"

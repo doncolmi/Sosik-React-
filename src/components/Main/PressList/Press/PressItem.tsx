@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import "./Press.css";
+import "./PressItem.css";
 
 interface Props {
   icon: string;

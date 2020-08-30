@@ -1,0 +1,13 @@
+.pTop {
+  display: flex;
+  flex-direction: column;
+  line-height: 2.5em;
+}
+.pSmall {
+  font-weight: 300;
+  color: gray;
+}
+.pName {
+  font-weight: 500;
+  font-size: 4em;
+}
