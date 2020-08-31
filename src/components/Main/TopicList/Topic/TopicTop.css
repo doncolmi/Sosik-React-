@@ -1,0 +1,13 @@
+.tTop {
+  display: flex;
+  flex-direction: column;
+  line-height: 2.5em;
+}
+.tSmall {
+  font-weight: 300;
+  color: gray;
+}
+.tName {
+  font-weight: 500;
+  font-size: 4em;
+}

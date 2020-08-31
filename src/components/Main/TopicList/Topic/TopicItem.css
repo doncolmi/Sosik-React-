@@ -1,0 +1,23 @@
+.tInfo .tItem {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tItem span {
+  font-size: 4em;
+}
+.napkin {
+  width: 10%;
+  height: 0.5em;
+  background-color: gray;
+}
+.tData {
+  font-size: 3em;
+  font-weight: 500;
+}
+.tDescription {
+  font-size: 0.9em;
+  font-weight: 200;
+  color: gray;
+}

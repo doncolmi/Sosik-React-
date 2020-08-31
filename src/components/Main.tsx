@@ -8,6 +8,7 @@ import NewsList, { Types } from "./Main/NewsList/NewsList";
 import PressList from "./Main/PressList/PressList";
 import Press from "./Main/PressList/Press/Press";
 import TopicList from "./Main/TopicList/TopicList";
+import Topic from "./Main/TopicList/Topic/Topic";
 
 const Main: FC = () => {
   return (
@@ -30,6 +31,7 @@ const Main: FC = () => {
             <Route exact path="/press" component={PressList} />
             <Route exact path="/press/:name" component={Press} />
             <Route exact path="/topic" component={TopicList} />
+            <Route exact path="/topic/:name" component={Topic} />
           </Switch>
         </div>
       </div>
