@@ -5,6 +5,9 @@ import "./NewsItem.css";
 
 import { load } from "cheerio";
 
+import { useDispatch } from "react-redux";
+import { setIsView, setNewsData } from "../../../modules/news";
+
 interface Props {
   data: News;
 }
@@ -12,6 +15,14 @@ const NewsItem: FC<Props> = ({ data }: Props) => {
   const [fake, setFake] = useState("");
 
   const { fakeNews, title, topicName, pressName, createdDate } = data;
+
+  const dispatch = useDispatch();
+  const doSetIsView = (bool: boolean) => {
+    dispatch(setIsView(bool));
+  };
+  const doSetNewsData = (data: News) => {
+    dispatch(setNewsData(data));
+  };
 
   if (fakeNews > 10) {
     setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
@@ -54,9 +65,15 @@ const NewsItem: FC<Props> = ({ data }: Props) => {
     );
   }
 
+  async function getModal(data: News) {
+    await doSetNewsData(data);
+    await doSetIsView(true);
+    console.log("하이");
+  }
+
   return (
     <div>
-      <div className="NewsItem">
+      <div className="NewsItem" onClick={() => getModal(data)}>
         <div className="NewsPicture" style={setImage(data.contents)}></div>
         <div className="NewsContents">
           <span className="NewsTitle">{title}</span>

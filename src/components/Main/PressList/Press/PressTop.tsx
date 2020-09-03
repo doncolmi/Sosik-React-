@@ -3,8 +3,6 @@ import "./PressTop.css";
 
 import { useGetRequest } from "../../../../hooks/useRequest";
 
-import Axios from "axios";
-
 import PressFollow from "../PressFollow";
 
 interface Props {

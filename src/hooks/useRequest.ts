@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { setIsLoading } from "../modules/news";
 
 export function useGetRequest(url: string) {
   const [loading, setLoading] = useState(false);
@@ -10,7 +9,7 @@ export function useGetRequest(url: string) {
   const doRequest = async (url: string) => {
     setError(null);
     try {
-      setIsLoading(true);
+      setLoading(true);
       const res = await axios.get(url);
       setResponse(res);
     } catch (e) {
@@ -32,7 +31,7 @@ export function usePostRequest(url: string, data: Object) {
   const doRequest = async (url: string) => {
     setError(null);
     try {
-      setIsLoading(true);
+      setLoading(true);
       const res = await axios.post(url, data);
       setResponse(res);
     } catch (e) {

@@ -1,0 +1,69 @@
+.ModalHeader {
+  width: 90%;
+  display: flex;
+  margin-bottom: 1em;
+}
+.ModalCloseBtn {
+  margin-left: auto;
+  cursor: pointer;
+}
+.PressTopic {
+  margin-right: auto;
+  font-size: 0.9em;
+  font-weight: 200;
+  color: rgba(0, 0, 0, 0.5);
+}
+.ModalBody {
+  width:90%;
+  display: flex;
+  flex-direction: column;
+}
+.ModalBody hr {
+  width: 100%;
+  margin: 1em 0%;
+}
+.ModalTitle {
+  margin: 0 auto;
+  font-size: 2.5em;
+  font-weight: 500;
+}
+.ModalTitleBottom {
+  width: 100%;
+  display: flex;
+  margin-top: 1em;
+font-size: 0.9em;
+  font-weight: 200;
+  color: rgba(0, 0, 0, 0.6);
+}
+.ModalTime {
+  margin-left: auto;
+}
+.ModalSave {
+  margin-right: auto;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.ModalContents {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-weight: 200;
+}
+.media_end_summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.end_photo_org {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img_desc {
+  font-style: normal !important;
+  font-size: 0.9em;
+  color: rgba(0,0,0,0.8);
+}

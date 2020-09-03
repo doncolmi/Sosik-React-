@@ -1,0 +1,57 @@
+.ModalWrapper {
+  box-sizing: border-box;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+  animation: fadein 0.5s;
+  outline: 0;
+}
+
+.ModalOverlay {
+  box-sizing: border-box;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: fadein 0.5s;
+
+  z-index: 999;
+}
+
+.ModalInner {
+  font-family: "NotoSansKR";
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 100%;
+  height: 90%;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: fadein 0.5s;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

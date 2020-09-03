@@ -153,7 +153,7 @@ const NewsList: FC<Props> = ({ type, name }: Props) => {
   }
   return (
     <>
-      <NoNews type={type} isShow={noNews} />;
+      <NoNews type={type} isShow={noNews} />
     </>
   );
 };

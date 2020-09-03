@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "../css/Main.css";
 
+import Modal from "./Util/Modal/Modal";
 import Header from "./Main/Header/Header";
 import Float from "./Main/Float/Float";
 import NewsList, { Types } from "./Main/NewsList/NewsList";
@@ -35,6 +36,7 @@ const Main: FC = () => {
           </Switch>
         </div>
       </div>
+      <Modal />
     </Router>
   );
 };
