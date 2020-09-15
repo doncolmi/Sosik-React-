@@ -60,7 +60,7 @@ const Kakao: FC = () => {
   const responseKaKao = async ({ profile, response }: kakaoObject) => {
     const userDto: UserDto = createUserDto(profile, response);
     const { data } = await Axios.post(
-      "http://localhost:3001/auth/login",
+      `${process.env["REACT_APP_BACKEND_SERVER"]}/auth/login`,
       userDto,
       { withCredentials: true }
     );

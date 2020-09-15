@@ -67,3 +67,31 @@ font-size: 0.9em;
   font-size: 0.9em;
   color: rgba(0,0,0,0.8);
 }
+.ModalFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0em;
+}
+.question {
+  font-size: 0.9em;
+  font-weight: 200;
+}
+.fakeBtn {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 1em;
+  padding: 0em 2em;
+  padding-bottom:0.3em;
+  font-size: 1.2em;
+  text-align: center;
+  transition: .3s;
+  cursor: pointer;
+}
+.fakeBtn span {
+  font-size:2em;
+}
+.fakeBtn:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}

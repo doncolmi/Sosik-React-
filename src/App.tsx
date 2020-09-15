@@ -9,7 +9,7 @@ function App() {
 
   const onLogin = async () => {
     axios
-      .post("http://localhost:3001/auth", null, { withCredentials: true })
+      .post(`${process.env["REACT_APP_BACKEND_SERVER"]}/auth`, null, { withCredentials: true })
       .then(onLoginSuccess)
       .catch((err) => {
         setIsLoggined(false);
