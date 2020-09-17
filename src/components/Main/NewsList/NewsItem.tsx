@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Properties } from "csstype";
 import { News } from "./NewsList";
 import "./NewsItem.css";
@@ -16,6 +16,13 @@ const NewsItem: FC<Props> = ({ data }: Props) => {
 
   const { fakeNews, title, topicName, pressName, createdDate } = data;
 
+  useEffect(() => {
+    (async () => {
+      if (fakeNews > 10)
+        await setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
+    })();
+  });
+
   const dispatch = useDispatch();
   const doSetIsView = (bool: boolean) => {
     dispatch(setIsView(bool));
@@ -23,10 +30,6 @@ const NewsItem: FC<Props> = ({ data }: Props) => {
   const doSetNewsData = (data: News) => {
     dispatch(setNewsData(data));
   };
-
-  if (fakeNews > 10) {
-    setFake("!!해당 뉴스는 가짜 뉴스일 확률이 있습니다!!");
-  }
 
   function setImage(contents: string): Properties {
     const $ = load(contents);
