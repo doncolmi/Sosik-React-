@@ -1,11 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import "./Modal.css";
-import Portal from "./Portal";
 
 import ModalOverlay from "./ModalOverlay";
 import ModalWrapper from "./ModalWrapper";
 
-import { News } from "../../Main/NewsList/NewsList";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../modules";
 
