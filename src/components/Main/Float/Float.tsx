@@ -15,6 +15,7 @@ const Float: FC = () => {
     else if (path.includes("press")) return 4;
     else if (path === "/news/topic") return 2;
     else if (path.includes("topic")) return 5;
+    else if (path.includes("save")) return 6;
     else return 1;
   }
 
@@ -58,6 +59,14 @@ const Float: FC = () => {
           content="주제 목록 보기"
           current={current}
           thisNum={5}
+        />
+      </div>
+      <div onClick={() => setCurrent(6)}>
+        <FloatMenu
+          link="/save"
+          content="내가 저장한 기사 보기"
+          current={current}
+          thisNum={6}
         />
       </div>
     </div>

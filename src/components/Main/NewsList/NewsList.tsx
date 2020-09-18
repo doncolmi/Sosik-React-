@@ -4,6 +4,8 @@ import "./NewsList.css";
 
 import NewsItem from "./NewsItem";
 import NoNews from "./NoNews";
+import LoadingBar from "../../Util/Loading/LoadingBar";
+import { JsxElement } from "typescript";
 
 export enum Types {
   PRESS = "언론사",
@@ -127,35 +129,25 @@ const NewsList: FC<Props> = ({ type, name }: Props) => {
     }
   };
 
+  const loadDiv = <div ref={setTarget} className="bammm"></div>;
+
   if (isLoading && isFirstPage) {
     return (
       <div>
-        <img src="/loadingBar.gif" alt="Hello" />
-        <div ref={setTarget} className="bammm"></div>;
+        <LoadingBar />
+        { loadDiv }
       </div>
     );
   } else if (newsList) {
     return (
       <div className="NewsList">
-        {newsList.map((element: any) => {
-          return <NewsItem data={element} key={Math.random()} />;
-        })}
-        {isLoading ? (
-          <div className="loadingBar">
-            <img src="/loadingBar.gif" alt="loadingBar" />
-          </div>
-        ) : (
-          <div ref={setTarget} className="bammm"></div>
-        )}
+        {newsList.map((element: any) => (<NewsItem data={element} key={Math.random()} />))}
+        {isLoading ? <LoadingBar /> : loadDiv}
         {isEnd && <div> 마지막 페이지 입니다. </div>}
       </div>
     );
   }
-  return (
-    <>
-      <NoNews type={type} isShow={noNews} />
-    </>
-  );
+  return ( <NoNews type={type} isShow={noNews} /> );
 };
 
 export default NewsList;

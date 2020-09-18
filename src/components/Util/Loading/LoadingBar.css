@@ -1,0 +1,12 @@
+.loadingBar {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loadingBar img{
+    width:5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
