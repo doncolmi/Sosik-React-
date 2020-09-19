@@ -1,0 +1,22 @@
+.infoTitle {
+  font-size: 0.9em;
+  border-bottom: 0.3px solid gray;
+}
+.infoItemWrapper {
+  width: 100%;
+  padding: 1em 0em;
+}
+.infoItem {
+  display: inline-block;
+  padding: 0.2em 1em;
+  margin-bottom: 0.2em;
+  margin-right: 0.2em;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-weight: 200;
+  border-radius: 1em;
+  transition: 0.3s;
+}
+.infoItem:hover {
+  transform: translateY(-3px);
+}
