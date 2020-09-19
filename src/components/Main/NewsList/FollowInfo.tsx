@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import "./FollowInfo.css";
 
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { Types } from "./NewsList";
 
@@ -35,9 +34,7 @@ const FollowInfo: FC<Props> = ({ type }: Props) => {
         </div>
         <div className="infoItemWrapper">
           {list.map((element: any) => (
-            <span className="infoItem">
-              <Link to={`/press/${element}`}>{element}</Link>
-            </span>
+            <span className="infoItem">{element}</span>
           ))}
         </div>
       </>
