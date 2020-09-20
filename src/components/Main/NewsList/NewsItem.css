@@ -62,10 +62,10 @@
   justify-content: flex-end;
   align-items: flex-end;
 }
-.saveNews span {
+.saveNewsBtn {
   font-size: 1.5em;
   transition: 0.3s;
 }
-.saveNews span:hover {
+.saveNewsBtn:hover {
   color: black;
 }
