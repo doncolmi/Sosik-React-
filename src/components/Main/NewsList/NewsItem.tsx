@@ -13,7 +13,7 @@ interface Props {
   data: News;
 }
 const NewsItem: FC<Props> = ({ data }: Props) => {
-  const { newsId, fakeNews, title, topicName, pressName, createdDate, contents } = data;
+  const { fakeNews, title, topicName, pressName, createdDate, contents } = data;
 
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ const NewsItem: FC<Props> = ({ data }: Props) => {
           topicName={topicName}
           fakeNews={fakeNews}
         />
-        <NewsInfo createdDate={createdDate} newsId={newsId} />
+        <NewsInfo createdDate={createdDate} />
       </div>
       <hr />
     </div>

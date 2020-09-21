@@ -1,14 +1,11 @@
 import React, { FC } from "react";
 import "../NewsItem.css";
 
-import SaveNewsBtn from "./SaveNewsBtn";
-
 interface Props {
   createdDate: string;
-  newsId: string;
 }
 
-const NewsInfo: FC<Props> = ({ createdDate, newsId }: Props) => {
+const NewsInfo: FC<Props> = ({ createdDate }: Props) => {
   function simpleDate(createdDate: string): any {
     const now: number = new Date().getTime();
     const date: number = new Date(createdDate).getTime();
@@ -39,9 +36,6 @@ const NewsInfo: FC<Props> = ({ createdDate, newsId }: Props) => {
     <div className="NewsInfo">
       <div>
         <span className="date">{simpleDate(createdDate)}</span>
-      </div>
-      <div className="saveNews">
-        <SaveNewsBtn newsId={newsId} />
       </div>
     </div>
   );

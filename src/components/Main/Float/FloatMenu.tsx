@@ -11,15 +11,15 @@ interface Props {
 
 const FloatMenu: FC<Props> = ({link, content, current, thisNum}: Props) => {
   
-    const [style, setStyle] = useState<string>("");
+  const [style, setStyle] = useState<string>("");
+
   useEffect(() => {
     checkCurrent(current, thisNum);
-  }, [ current ])
+  }, [ current, thisNum ])
 
-    function checkCurrent(cur:number, num: number) {
-        cur === num ? setStyle("activeMenu") : setStyle("")
-    }
-
+  function checkCurrent(cur:number, num: number) {
+      cur === num ? setStyle("activeMenu") : setStyle("")
+  }
 
   return (
       <div className={style}>

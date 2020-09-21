@@ -3,13 +3,14 @@ import { useGetRequest } from "../../../hooks/useRequest";
 import "./TopicList.css";
 
 import TopicListItem from "./TopicListItem";
+import LoadingBar from "../../Util/Loading/LoadingBar";
 
 const TopicList: FC = () => {
   const [response, loading, error] = useGetRequest(
     `${process.env["REACT_APP_BACKEND_SERVER"]}/topic`
   );
 
-  if (loading) return <div>loading...</div>;
+  if (loading) return <LoadingBar />;
   if (error) return <div>error!</div>;
 
   if (!response) return null;

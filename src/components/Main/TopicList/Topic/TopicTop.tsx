@@ -3,8 +3,6 @@ import "./TopicTop.css";
 
 import { useGetRequest } from "../../../../hooks/useRequest";
 
-import Axios from "axios";
-
 import TopicFollow from "../TopicFollow";
 
 interface Props {

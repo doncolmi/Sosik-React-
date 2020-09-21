@@ -19,7 +19,7 @@ const ModalInner: FC<Props> = ({ data }: Props) => {
   return (
     <div className="ModalInner">
       <ModalHeader pressName={data.pressName} topicName={data.topicName}/>
-      <ModalBody title={data.title} createdDate={data.createdDate} contents={data.contents} />
+      <ModalBody newsId={data.newsId} title={data.title} createdDate={data.createdDate} contents={data.contents} />
       <ModalFooter newsId={data.newsId} />
     </div>
   );

@@ -1,0 +1,12 @@
+.ProfileWrapper {
+    width:60%;
+    font-family: NotoSansKR;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ProfileTitle {
+    font-size: 3em;
+    font-weight: 500;
+}

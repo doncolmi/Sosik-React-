@@ -3,13 +3,15 @@ import { useGetRequest } from "../../../hooks/useRequest";
 import "./PressList.css";
 
 import PressListItem from "./PressListItem";
+import LoadingBar from "../../Util/Loading/LoadingBar";
+
 
 const PressList: FC = () => {
   const [response, loading, error] = useGetRequest(
     `${process.env["REACT_APP_BACKEND_SERVER"]}/press`
   );
 
-  if (loading) return <div>loading...</div>;
+  if (loading) return <LoadingBar />;
   if (error) return <div>error!</div>;
 
   if (!response) return null;

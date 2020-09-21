@@ -29,6 +29,7 @@ interface tokenInfo {
 }
 
 const Kakao: FC = () => {
+
   const kakaoJSKey: string = process.env["REACT_APP_KAKAO_API"]!;
 
   const createUserDto = (profile: any, response: any): UserDto => {
@@ -42,18 +43,13 @@ const Kakao: FC = () => {
     };
   };
 
-  const setAxiosHeader = async (accessToken: string) => {
-    Axios.defaults.headers.common["Authorization"] = `${accessToken}`;
-    window.location.reload();
-  };
-
   const welcomeMessage = (access_token: string): void => {
     Swal.fire({
       icon: "success",
       title: "회원가입 성공!",
       text: "회원가입 성공되었습니다!",
     }).then(({ value }: SweetAlertResult) => {
-      if (value) setAxiosHeader(access_token);
+      if (value) window.location.reload();
     });
   };
 
@@ -65,7 +61,7 @@ const Kakao: FC = () => {
       { withCredentials: true }
     );
     const { access_token }: tokenInfo = response;
-    if (data) await setAxiosHeader(access_token);
+    if (data) window.location.reload();
     else await welcomeMessage(access_token);
   };
 

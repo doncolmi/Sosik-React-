@@ -10,6 +10,8 @@ import PressList from "./Main/PressList/PressList";
 import Press from "./Main/PressList/Press/Press";
 import TopicList from "./Main/TopicList/TopicList";
 import Topic from "./Main/TopicList/Topic/Topic";
+import SaveNews from "./Main/NewsList/SaveNewsList";
+import Profile from "./Main/MyPage/Profile";
 
 const Main: FC = () => {
   return (
@@ -33,6 +35,8 @@ const Main: FC = () => {
             <Route exact path="/press/:name" component={Press} />
             <Route exact path="/topic" component={TopicList} />
             <Route exact path="/topic/:name" component={Topic} />
+            <Route exact path="/save" component={SaveNews} />
+            <Route exact path="/profile" component={Profile} />
           </Switch>
         </div>
       </div>

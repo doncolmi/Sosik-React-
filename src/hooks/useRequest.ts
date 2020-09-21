@@ -28,19 +28,21 @@ export function usePostRequest(url: string, data: Object) {
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState(null);
 
-  const doRequest = async (url: string) => {
-    setError(null);
-    try {
-      setLoading(true);
-      const res = await axios.post(url, data);
-      setResponse(res);
-    } catch (e) {
-      setError(e);
-    }
-    setLoading(false);
-  };
+  
 
   useEffect(() => {
+    const doRequest = async (url: string) => {
+      setError(null);
+      try {
+        setLoading(true);
+        const res = await axios.post(url, data);
+        setResponse(res);
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
+    
     doRequest(url);
   }, [url, data]);
   return [response, loading, error];

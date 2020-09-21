@@ -69,3 +69,6 @@
 .saveNewsBtn:hover {
   color: black;
 }
+.savedNewsBtn {
+  color: black;
+}

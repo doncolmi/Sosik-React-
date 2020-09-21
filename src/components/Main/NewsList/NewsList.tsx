@@ -6,6 +6,7 @@ import NewsItem from "./NewsItem";
 import NoNews from "./NoNews";
 import LoadingBar from "../../Util/Loading/LoadingBar";
 import FollowInfo from "./FollowInfo";
+import LastDiv from "../../Util/LastDiv/LastDiv";
 
 export enum Types {
   PRESS = "언론사",
@@ -140,14 +141,14 @@ const NewsList: FC<Props> = ({ type, name }: Props) => {
     );
   } else if (newsList) {
     return (
-      <div className="NewsList">
-        <FollowInfo type={type} />
-        {newsList.map((element: any) => (
-          <NewsItem data={element} key={Math.random()} />
-        ))}
-        {isLoading ? <LoadingBar /> : loadDiv}
-        {isEnd && <div> 마지막 페이지 입니다. </div>}
-      </div>
+        <div className="NewsList">
+          <FollowInfo type={type} />
+          {newsList.map((element: any) => (
+            <NewsItem data={element} key={Math.random()} />
+          ))}
+          {isLoading ? <LoadingBar /> : loadDiv}
+          {isEnd && <LastDiv />}
+        </div>
     );
   }
   return <NoNews type={type} isShow={noNews} />;

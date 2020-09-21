@@ -10,6 +10,7 @@ const Float: FC = () => {
     setLocation(location.pathname)
   );
 
+
   function setLocation(path: string): number {
     if (path.includes("all")) return 3;
     else if (path.includes("press")) return 4;
@@ -18,7 +19,6 @@ const Float: FC = () => {
     else if (path.includes("save")) return 6;
     else return 1;
   }
-
   return (
     <div className="Floatting">
       <div onClick={() => setCurrent(1)}>

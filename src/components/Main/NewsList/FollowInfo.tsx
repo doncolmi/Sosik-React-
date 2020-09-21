@@ -34,7 +34,7 @@ const FollowInfo: FC<Props> = ({ type }: Props) => {
         </div>
         <div className="infoItemWrapper">
           {list.map((element: any) => (
-            <span className="infoItem">{element}</span>
+            <span className="infoItem" key={Math.random()}>{element}</span>
           ))}
         </div>
       </>
