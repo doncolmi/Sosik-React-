@@ -1,0 +1,30 @@
+.QuitWrapper {
+  width: 60%;
+  font-family: NotoSansKR;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.QuitWrapper hr {
+  width: 100%;
+}
+.QuitTitle {
+  font-size: 3em;
+  font-weight: 500;
+}
+.QuitText {
+  font-size: 1.3em;
+  font-weight: 200;
+}
+.bold {
+  font-size: 1.5em;
+  font-weight: 300;
+}
+.QuitInput {
+  margin: 3em 0em 1em 0em;
+  width: 20%;
+  padding: 0.5em 0.25em;
+  font-size: 1.2em;
+  text-align: center;
+}

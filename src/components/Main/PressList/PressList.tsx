@@ -5,7 +5,6 @@ import "./PressList.css";
 import PressListItem from "./PressListItem";
 import LoadingBar from "../../Util/Loading/LoadingBar";
 
-
 const PressList: FC = () => {
   const [response, loading, error] = useGetRequest(
     `${process.env["REACT_APP_BACKEND_SERVER"]}/press`

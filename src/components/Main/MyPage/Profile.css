@@ -1,12 +1,48 @@
 .ProfileWrapper {
-    width:60%;
-    font-family: NotoSansKR;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 60%;
+  font-family: NotoSansKR;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ProfileWrapper hr {
+  width: 100%;
 }
 .ProfileTitle {
-    font-size: 3em;
-    font-weight: 500;
+  font-size: 3em;
+  font-weight: 500;
+}
+
+.ProfileBlock {
+  width: 30%;
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.ProfileBlock hr {
+  width: 100%;
+}
+.ProfileTop {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+.ProfileTopSub {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+.ProfileTopTime {
+  font-size: 1.2em;
+  font-weight: 200;
+}
+
+.ProfileButtons {
+  width: 100%;
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }

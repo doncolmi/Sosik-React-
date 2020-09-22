@@ -12,6 +12,7 @@ import TopicList from "./Main/TopicList/TopicList";
 import Topic from "./Main/TopicList/Topic/Topic";
 import SaveNews from "./Main/NewsList/SaveNewsList";
 import Profile from "./Main/MyPage/Profile";
+import Quit from "./Main/MyPage/Quit";
 
 const Main: FC = () => {
   return (
@@ -27,6 +28,11 @@ const Main: FC = () => {
               render={() => <NewsList type={Types.PRESS} />}
             />
             <Route
+              exact
+              path="/news/press"
+              render={() => <NewsList type={Types.PRESS} />}
+            />
+            <Route
               path="/news/topic"
               render={() => <NewsList type={Types.TOPIC} />}
             />
@@ -37,6 +43,7 @@ const Main: FC = () => {
             <Route exact path="/topic/:name" component={Topic} />
             <Route exact path="/save" component={SaveNews} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/quit" component={Quit} />
           </Switch>
         </div>
       </div>

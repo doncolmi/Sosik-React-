@@ -10,7 +10,6 @@ const Float: FC = () => {
     setLocation(location.pathname)
   );
 
-
   function setLocation(path: string): number {
     if (path.includes("all")) return 3;
     else if (path.includes("press")) return 4;
@@ -23,7 +22,7 @@ const Float: FC = () => {
     <div className="Floatting">
       <div onClick={() => setCurrent(1)}>
         <FloatMenu
-          link="/"
+          link="/news/press"
           content="언론사 기준 뉴스피드"
           current={current}
           thisNum={1}
