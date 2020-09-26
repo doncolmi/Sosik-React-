@@ -1,44 +1,209 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Readme(React)
 
-## Available Scripts
+# Sosik(소식) - React 프로젝트
 
-In the project directory, you can run:
+---
 
-### `npm start`
+### 프로젝트 소개
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+뉴스를 크롤링 하여 언론사나 주제별로 묶어 피드를 만들어주는 웹 애플리케이션입니다.
 
-### `npm test`
+TypeScript를 적용하였습니다.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 특징
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`react-kakao-login` 를 사용하여 Oauth2 로그인을 구현하였습니다.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+`axios` 를 사용하여 백엔드 서버와 통신하였습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**개발 시 특징**
 
-### `npm run eject`
+`typescript` 를 사용하였습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 폴더 구조
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+C:.
+│  App.tsx
+│  index.css
+│  index.tsx
+│  logo.svg
+│  react-app-env.d.ts
+│  serviceWorker.ts
+│  setupTests.ts
+│
+├─components
+│  │  GuestMain.tsx // 로그인 안했을 때 페이지 입니다.
+│  │  Main.tsx // 로그인 후 페이지 입니다.
+│  │
+│  ├─GuestMain // GuestMain 관련 컴포넌트입니다.
+│  │  ├─Bottom
+│  │  │      Bottom.css
+│  │  │      Bottom.tsx
+│  │  │      Footer.css
+│  │  │      Footer.tsx
+│  │  │
+│  │  ├─Dots // 상단 위치 포인트 관련입니다.
+│  │  │      Dot.tsx
+│  │  │      Dots.css
+│  │  │      Dots.tsx
+│  │  │
+│  │  ├─Middle
+│  │  │      Middle.css
+│  │  │      Middle.tsx
+│  │  │
+│  │  └─Top
+│  │      │  Top.css
+│  │      │  Top.tsx
+│  │      │
+│  │      └─Icons
+│  │              Down.tsx
+│  │              icon.css
+│  │              Icon.tsx
+│  │              Icons.tsx
+│  │
+│  ├─Main // Main 관련 컴포넌트입니다.
+│  │  ├─Float // 로그인 후에 항상 오른쪽에 상주하고 있는 메뉴입니다.
+│  │  │      BottomFloat.css
+│  │  │      BottomFloat.tsx
+│  │  │      Float.css
+│  │  │      Float.tsx
+│  │  │      FloatMenu.tsx
+│  │  │
+│  │  ├─Header
+│  │  │      Header.css
+│  │  │      Header.tsx
+│  │  │      MyInfo.tsx
+│  │  │
+│  │  ├─MyPage // 마이페이지 입니다.
+│  │  │      Profile.css
+│  │  │      Profile.tsx
+│  │  │      Quit.css
+│  │  │      Quit.tsx
+│  │  │
+│  │  ├─NewsList // 뉴스 리스트 관련 입니다.
+│  │  │  │  FollowInfo.css
+│  │  │  │  FollowInfo.tsx
+│  │  │  │  NewsItem.css
+│  │  │  │  NewsItem.tsx
+│  │  │  │  NewsList.css
+│  │  │  │  NewsList.tsx
+│  │  │  │  NoNews.tsx
+│  │  │  │  SaveNewsList.tsx
+│  │  │  │
+│  │  │  └─NewsItem 
+│  │  │          NewsContents.tsx
+│  │  │          NewsInfo.tsx
+│  │  │          NewsPicture.tsx
+│  │  │          SaveNewsBtn.tsx
+│  │  │
+│  │  ├─PressList // 언론사 목록 관련 입니다.
+│  │  │  │  PressFollow.tsx
+│  │  │  │  PressList.css
+│  │  │  │  PressList.tsx
+│  │  │  │  PressListItem.css
+│  │  │  │  PressListItem.tsx
+│  │  │  │  PressName.tsx
+│  │  │  │  PressNum.tsx
+│  │  │  │
+│  │  │  └─Press
+│  │  │          Press.css
+│  │  │          Press.tsx
+│  │  │          PressItem.css
+│  │  │          PressItem.tsx
+│  │  │          PressTop.css
+│  │  │          PressTop.tsx
+│  │  │
+│  │  └─TopicList // 주제 목록 관련 입니다.
+│  │      │  TopicFollow.tsx
+│  │      │  TopicList.css
+│  │      │  TopicList.tsx
+│  │      │  TopicListItem.css
+│  │      │  TopicListItem.tsx
+│  │      │
+│  │      └─Topic
+│  │              Topic.css
+│  │              Topic.tsx
+│  │              TopicItem.css
+│  │              TopicItem.tsx
+│  │              TopicTop.css
+│  │              TopicTop.tsx
+│  │
+│  └─Util // 기타 컴포넌트입니다.
+│      ├─Block // 블록 관련
+│      │      Block.css
+│      │      Block.tsx
+│      │      ImgBlock.css
+│      │      ImgBlock.tsx
+│      │
+│      ├─Button // 버튼 관련
+│      │      Button.css
+│      │      Button.tsx
+│      │
+│      ├─Form // 작성 폼
+│      │      Form.css
+│      │      Form.tsx
+│      │
+│      ├─LastDiv // 마지막 뉴스 리스트일때 나오는 div 
+│      │      LastDiv.css
+│      │      LastDiv.tsx
+│      │
+│      ├─Loading // 로딩 바 관련
+│      │      LoadingBar.css
+│      │      LoadingBar.tsx
+│      │
+│      ├─Modal // 모달창 관련
+│      │  │  Modal.css
+│      │  │  Modal.tsx
+│      │  │  ModalInner.css
+│      │  │  ModalInner.tsx
+│      │  │  ModalOverlay.tsx
+│      │  │  ModalWrapper.tsx
+│      │  │  Portal.tsx
+│      │  │
+│      │  └─Content
+│      │          ModalBody.tsx
+│      │          ModalFooter.tsx
+│      │          ModalHeader.tsx
+│      │          SaveNews.tsx
+│      │
+│      └─SocialLogin // 카카오 로그인 버튼
+│              Kakao.css
+│              Kakao.tsx
+│
+├─css // css 관련 폴더입니다. 처음엔 사용했는데...관리가 점점힘들어 져서 ㅠㅠ...
+│  │  GuestMain.css
+│  │  Main.css
+│  │
+│  └─fonts // 사용하는 폰트 폴더입니다. google font의 cdn을 사용했으나 로드 관련 문제로 직접 삽입하였습니다.
+│          NanumMyeongjo-Regular.ttf
+│          NotoSansKR-Black.otf
+│          NotoSansKR-Bold.otf
+│          NotoSansKR-Light.otf
+│          NotoSansKR-Medium.otf
+│          NotoSansKR-Regular.otf
+│          NotoSansKR-Thin.otf
+│
+├─hooks // 커스텀 훅
+│      useRequest.ts
+│
+└─modules // Redux 관련 폴더
+        index.ts
+        news.ts
+        user.ts
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 환경 변수 파일
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+# 카카오 API 키
+REACT_APP_KAKAO_API
+# 백엔드 서버 주소
+REACT_APP_BACKEND_SERVER
+```
