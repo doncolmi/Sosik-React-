@@ -1,5 +1,3 @@
-# Readme(React)
-
 # Sosik(소식) - React 프로젝트
 
 ---
